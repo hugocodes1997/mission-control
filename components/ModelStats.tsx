@@ -1,11 +1,11 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { 
-  Cpu, 
-  Zap, 
-  TrendingUp, 
-  Clock, 
+import {
+  Cpu,
+  Zap,
+  TrendingUp,
+  Clock,
   DollarSign,
   AlertCircle,
   CheckCircle,
@@ -19,6 +19,7 @@ interface ModelInfo {
   description: string;
   capabilities: string[];
   default: boolean;
+  active: boolean;
 }
 
 interface UsageStats {
@@ -37,6 +38,7 @@ const AVAILABLE_MODELS: ModelInfo[] = [
     description: "Current default model. Strong reasoning and coding capabilities.",
     capabilities: ["reasoning", "coding", "long-context"],
     default: true,
+    active: true,
   },
   {
     id: "anthropic/claude-opus-4-5",
@@ -45,6 +47,7 @@ const AVAILABLE_MODELS: ModelInfo[] = [
     description: "Most capable model for complex tasks and analysis.",
     capabilities: ["reasoning", "analysis", "coding", "writing"],
     default: false,
+    active: true,
   },
   {
     id: "anthropic/claude-3-5-haiku-latest",
@@ -53,6 +56,34 @@ const AVAILABLE_MODELS: ModelInfo[] = [
     description: "Fast and cost-effective for simple tasks.",
     capabilities: ["speed", "simple-tasks"],
     default: false,
+    active: true,
+  },
+  {
+    id: "openai/gpt-4o",
+    name: "GPT-4o",
+    provider: "OpenAI",
+    description: "OpenAI's flagship model for complex tasks. Great for analysis and coding.",
+    capabilities: ["reasoning", "analysis", "coding", "vision"],
+    default: false,
+    active: true,
+  },
+  {
+    id: "openai/gpt-4-turbo",
+    name: "GPT-4 Turbo",
+    provider: "OpenAI",
+    description: "Previous generation flagship with 128k context window.",
+    capabilities: ["long-context", "reasoning", "coding"],
+    default: false,
+    active: true,
+  },
+  {
+    id: "openai/gpt-3.5-turbo",
+    name: "GPT-3.5 Turbo",
+    provider: "OpenAI",
+    description: "Fast and cost-effective for simple tasks and quick responses.",
+    capabilities: ["speed", "simple-tasks", "cost-effective"],
+    default: false,
+    active: true,
   },
 ];
 
@@ -164,6 +195,12 @@ export function ModelStats() {
                         Default
                       </span>
                     )}
+                    {model.active && (
+                      <span className="text-xs px-2 py-0.5 rounded-full bg-green-500/20 text-green-400 flex items-center gap-1">
+                        <CheckCircle className="w-3 h-3" />
+                        Active
+                      </span>
+                    )}
                     <span className="text-xs px-2 py-0.5 rounded-full bg-gray-800 text-gray-400">
                       {model.provider}
                     </span>
@@ -202,22 +239,33 @@ export function ModelStats() {
               Most providers (OpenAI, Anthropic, Moonshot) don't expose this via API. 
               Check your provider dashboards directly for current balances.
             </p>
-            <div className="mt-4 flex gap-4">
+            <div className="mt-4 flex flex-wrap gap-4">
               <a 
                 href="https://platform.openai.com/usage" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="text-sm text-blue-400 hover:text-blue-300"
+                className="text-sm text-blue-400 hover:text-blue-300 flex items-center gap-1"
               >
+                <CheckCircle className="w-3 h-3 text-green-400" />
                 OpenAI Dashboard →
               </a>
               <a 
                 href="https://console.anthropic.com/settings" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="text-sm text-blue-400 hover:text-blue-300"
+                className="text-sm text-blue-400 hover:text-blue-300 flex items-center gap-1"
               >
+                <CheckCircle className="w-3 h-3 text-green-400" />
                 Anthropic Console →
+              </a>
+              <a 
+                href="https://platform.moonshot.cn" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-sm text-blue-400 hover:text-blue-300 flex items-center gap-1"
+              >
+                <CheckCircle className="w-3 h-3 text-green-400" />
+                Moonshot Console →
               </a>
             </div>
           </div>
