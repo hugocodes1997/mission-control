@@ -1,4 +1,4 @@
-export type TabType = "activity" | "calendar" | "search";
+export type TabType = "activity" | "calendar" | "search" | "models";
 
 export interface Activity {
   _id: string;

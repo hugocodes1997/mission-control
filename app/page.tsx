@@ -4,9 +4,10 @@ import { useState } from "react";
 import { ActivityFeed } from "@/components/ActivityFeed";
 import { Calendar } from "@/components/Calendar";
 import { GlobalSearch } from "@/components/GlobalSearch";
+import { ModelStats } from "@/components/ModelStats";
 import { Stats } from "@/components/Stats";
 import { TabType } from "@/types";
-import { Activity, CalendarDays, Search, Command } from "lucide-react";
+import { Activity, CalendarDays, Search, Command, Cpu } from "lucide-react";
 
 export default function Home() {
   const [activeTab, setActiveTab] = useState<TabType>("activity");
@@ -15,6 +16,7 @@ export default function Home() {
     { id: "activity" as TabType, label: "Activity Feed", icon: Activity },
     { id: "calendar" as TabType, label: "Calendar", icon: CalendarDays },
     { id: "search" as TabType, label: "Global Search", icon: Search },
+    { id: "models" as TabType, label: "Models", icon: Cpu },
   ];
 
   return (
@@ -68,6 +70,7 @@ export default function Home() {
           {activeTab === "activity" && <ActivityFeed />}
           {activeTab === "calendar" && <Calendar />}
           {activeTab === "search" && <GlobalSearch />}
+          {activeTab === "models" && <ModelStats />}
         </div>
       </div>
     </div>
