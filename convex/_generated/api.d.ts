@@ -8,9 +8,6 @@
  * @module
  */
 
-import type * as activities from "../activities.js";
-import type * as calendar from "../calendar.js";
-import type * as search from "../search.js";
 import type * as tasks from "../tasks.js";
 
 import type {
@@ -20,9 +17,6 @@ import type {
 } from "convex/server";
 
 declare const fullApi: ApiFromModules<{
-  activities: typeof activities;
-  calendar: typeof calendar;
-  search: typeof search;
   tasks: typeof tasks;
 }>;
 
